@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Bclean</string>
     <string name="best">Tốt nhất</string>
     <string name="billing_coming_soon">Đây là bản thử nghiệm: thanh toán Google Play sẽ bật khi phát hành. Bật \"Giả lập đã mua Pro\" trong Cài đặt để thử tính năng Pro.</string>
     <string name="can_free">Có thể giải phóng</string>

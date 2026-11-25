@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Bclean</string>
     <string name="best">Best</string>
     <string name="billing_coming_soon">Test build: Google Play billing will be enabled at launch. Turn on \"Simulate Pro\" in Settings to try Pro features.</string>
     <string name="can_free">You can free up</string>
