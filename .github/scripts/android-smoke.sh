@@ -5,19 +5,15 @@ PKG=vn.bentic.bclean.debug
 APK=$(ls dist/*.apk | head -1)
 mkdir -p shots samples
 
-# Ảnh mẫu: 3 ảnh trùng + 2 ảnh khác
-convert -size 1200x900 gradient:teal-blue samples/a1.jpg
-cp samples/a1.jpg samples/a2.jpg; cp samples/a1.jpg samples/a3.jpg
-convert -size 1200x900 plasma:fractal samples/b1.jpg
-convert -size 900x1200 xc:orange -fill white -draw "circle 450,600 450,300" samples/c1.jpg
+python3 .github/scripts/make_samples.py
 
 adb wait-for-device
 adb install -r "$APK" || exit 1
 # Nạp ảnh mẫu qua MediaStore (cách chắc chắn trên Android 11+)
-for f in samples/*.jpg; do
+for f in samples/*.png; do
   n=$(basename $f)
   adb shell content insert --uri content://media/external/images/media \
-    --bind _display_name:s:$n --bind relative_path:s:Pictures/BcleanTest/ --bind mime_type:s:image/jpeg
+    --bind _display_name:s:$n --bind relative_path:s:Pictures/BcleanTest/ --bind mime_type:s:image/png
   ID=$(adb shell content query --uri content://media/external/images/media --projection _id:_display_name | grep "_display_name=$n" | grep -oE '_id=[0-9]+' | tail -1 | cut -d= -f2)
   echo "inserted $n as $ID"
   cat "$f" | adb shell content write --uri content://media/external/images/media/$ID
