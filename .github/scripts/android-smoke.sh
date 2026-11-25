@@ -13,12 +13,17 @@ convert -size 900x1200 xc:orange -fill white -draw "circle 450,600 450,300" samp
 
 adb wait-for-device
 adb install -r "$APK" || exit 1
-adb shell mkdir -p /sdcard/Pictures/BcleanTest
+# Nạp ảnh mẫu qua MediaStore (cách chắc chắn trên Android 11+)
 for f in samples/*.jpg; do
-  adb push "$f" /sdcard/Pictures/BcleanTest/
-  adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d "file:///sdcard/Pictures/BcleanTest/$(basename $f)" >/dev/null
+  n=$(basename $f)
+  adb shell content insert --uri content://media/external/images/media \
+    --bind _display_name:s:$n --bind relative_path:s:Pictures/BcleanTest/ --bind mime_type:s:image/jpeg
+  ID=$(adb shell content query --uri content://media/external/images/media --projection _id:_display_name | grep "_display_name=$n" | grep -oE '_id=[0-9]+' | tail -1 | cut -d= -f2)
+  echo "inserted $n as $ID"
+  cat "$f" | adb shell content write --uri content://media/external/images/media/$ID
 done
-sleep 5
+sleep 3
+adb shell content query --uri content://media/external/images/media --projection _id:_display_name:_size:width:height
 adb logcat -c
 
 # 1. Màn hình chào (lần đầu mở)
@@ -40,11 +45,13 @@ adb shell am start -W -n $PKG/vn.bentic.bclean.MainActivity
 sleep 20
 adb exec-out screencap -p > shots/2-dashboard.png
 
-# 3. Mở nhóm "Ảnh trùng" (ô thẻ đầu tiên của lưới)
+# 3. Mở nhóm "Ảnh trùng" (thẻ đầu tiên, góc trái lưới)
 SIZE=$(adb shell wm size | grep -oE '[0-9]+x[0-9]+' | tail -1); W=${SIZE%x*}; H=${SIZE#*x}
-adb shell input swipe $((W/2)) $((H*3/4)) $((W/2)) $((H/3)) 300
+adb shell input tap $((W*26/100)) $((H*58/100))
+sleep 4
+adb exec-out screencap -p > shots/3-duplicates.png
+adb shell input keyevent KEYCODE_BACK
 sleep 2
-adb exec-out screencap -p > shots/3-categories.png
 
 # 4. Tab Lướt ảnh
 adb shell input tap $((W*3/8)) $((H-80))
