@@ -1,0 +1,77 @@
+name: Bclean
+options:
+  bundleIdPrefix: vn.bentic
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Điền Team ID của tài khoản Apple Developer công ty (10 ký tự) — xem README
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+
+fileGroups:
+  - StoreKit
+  - README.md
+
+targets:
+  Bclean:
+    type: application
+    platform: iOS
+    sources:
+      - path: Bclean
+    info:
+      path: Bclean/Supporting/Info.plist
+      properties:
+        CFBundleDisplayName: Bclean
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, vi]
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+        NSPhotoLibraryUsageDescription: "Bclean needs access to your photos to find duplicates, similar shots and large videos. Everything is processed on your iPhone — nothing is uploaded."
+        NSPhotoLibraryAddUsageDescription: "Bclean saves compressed videos and still photos back to your library."
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: vn.bentic.bclean
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+
+  BcleanTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: BcleanTests
+    dependencies:
+      - target: Bclean
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Bclean:
+    build:
+      targets:
+        Bclean: all
+        BcleanTests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: StoreKit/Bclean.storekit
+    test:
+      config: Debug
+      targets:
+        - BcleanTests
+    archive:
+      config: Release

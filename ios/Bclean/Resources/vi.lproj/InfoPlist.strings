@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Bclean";
+"NSPhotoLibraryAddUsageDescription" = "Bclean lưu video đã nén và ảnh tĩnh vào thư viện của bạn.";
+"NSPhotoLibraryUsageDescription" = "Bclean cần quyền truy cập Ảnh để tìm ảnh trùng, ảnh giống nhau và video nặng. Mọi thứ được xử lý ngay trên iPhone — không tải lên đâu cả.";

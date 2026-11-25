@@ -1,0 +1,102 @@
+{
+  "identifier": "B1C1EA00",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "34.99",
+      "familyShareable": false,
+      "internalID": "61000003",
+      "localizations": [
+        {
+          "description": "Mở khoá vĩnh viễn",
+          "displayName": "Bclean Pro Trọn đời",
+          "locale": "vi"
+        },
+        {
+          "description": "Unlock forever",
+          "displayName": "Bclean Pro Lifetime",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "vn.bentic.bclean.lifetime",
+      "referenceName": "Lifetime",
+      "type": "NonConsumable"
+    }
+  ],
+  "settings": {
+    "_applicationInternalID": "",
+    "_developerTeamID": "",
+    "_failTransactionsEnabled": false,
+    "_locale": "vi_VN",
+    "_storefront": "VNM",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [
+    {
+      "id": "21000001",
+      "localizations": [],
+      "name": "Bclean Pro",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "3.99",
+          "familyShareable": false,
+          "groupNumber": 2,
+          "internalID": "61000001",
+          "introductoryOffer": {
+            "internalID": "71000001",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P3D"
+          },
+          "localizations": [
+            {
+              "description": "Dọn không giới hạn",
+              "displayName": "Bclean Pro Tuần",
+              "locale": "vi"
+            },
+            {
+              "description": "Unlimited cleaning",
+              "displayName": "Bclean Pro Weekly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "vn.bentic.bclean.weekly",
+          "recurringSubscriptionPeriod": "P1W",
+          "referenceName": "Weekly",
+          "subscriptionGroupID": "21000001",
+          "type": "RecurringSubscription"
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "24.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "61000002",
+          "localizations": [
+            {
+              "description": "Dọn không giới hạn",
+              "displayName": "Bclean Pro Năm",
+              "locale": "vi"
+            },
+            {
+              "description": "Unlimited cleaning",
+              "displayName": "Bclean Pro Yearly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "vn.bentic.bclean.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Yearly",
+          "subscriptionGroupID": "21000001",
+          "type": "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}
