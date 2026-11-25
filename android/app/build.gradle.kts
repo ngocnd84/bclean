@@ -20,6 +20,10 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-test"
+            // Thu gọn APK test (bỏ icon/code không dùng) — vẫn giữ chế độ debug
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
             isMinifyEnabled = true
